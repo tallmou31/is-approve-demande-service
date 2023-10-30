@@ -40,15 +40,15 @@ public class DemandeServiceImpl implements DemandeService {
                 } else {
                     demande.setStatus(Status.TRAITEMENT_REJETE);
                     demandeRepository.save(demande);
-                    return new ResponseWrapper(HttpStatus.NOT_ACCEPTABLE.value(), "Rejected request");
+                    return new ResponseWrapper(HttpStatus.NOT_ACCEPTABLE.value(), "Rejected request. Solvency issues");
                 }
             } else {
                 demande.setStatus(Status.TRAITEMENT_REJETE);
                 demandeRepository.save(demande);
-                return new ResponseWrapper(HttpStatus.NOT_ACCEPTABLE.value(), "Rejected request. Account not found");
+                return new ResponseWrapper(HttpStatus.NOT_FOUND.value(), "Rejected request. Account not found");
             }
         } else {
-            return new ResponseWrapper(HttpStatus.BAD_REQUEST.value(), "Rejected request. Request not found");
+            return new ResponseWrapper(HttpStatus.NOT_FOUND.value(), "Rejected request. Request not found");
         }
 
     }
